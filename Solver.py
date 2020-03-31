@@ -133,12 +133,12 @@ def recursiveSolveHuman():
 
 
 solutionTimes = []
-puzzleFiles = os.listdir('Puzzles/')
+puzzleFiles = os.listdir('Permutations/')
 solvers = [0, 0]
 
 # Solve each puzzle in the Puzzle directory.
 for puzzleFile in puzzleFiles:
-    with open('Puzzles/' + puzzleFile, 'r') as f:
+    with open('Permutations/' + puzzleFile, 'r') as f:
         lines = f.readlines()
         puzzleArray = []
         for line in lines:
@@ -171,7 +171,6 @@ for puzzleFile in puzzleFiles:
         puzzle = copy.deepcopy(puzzle2)
         solver = '\nHuman Recursive'
         solvers[1] += 1
-
     with open('Solutions/' + puzzleFile.replace('.txt', '_SOLUTION.txt'), 'w') as f:
         if not isSolved(puzzle):
             f.write('No Solution Found')
@@ -187,13 +186,15 @@ print 'Puzzle ' + str(solutionTimes.index(min(solutionTimes)) + 1) + ' took the 
 print list(solvers)
 
 solutionTimes = np.array([round(i) for i in solutionTimes])
-fig, ax = plt.subplots(1, 2, sharey=True, tight_layout=True)
-
+fig, ax = plt.subplots(1, 2, sharey=True, constrained_layout=True)
+fig.suptitle('Solver Statistics')
 labels, counts = np.unique(solutionTimes, return_counts=True)
 ax[0].bar(labels, counts, align='center', color='plum')
 ax[1].set_xticks(labels)
-ax[0].set_xlabel('Computation Time (seconds)')
-ax[0].set_ylabel('Frequency')
+ax[0].set_xlabel('Binned Computation Time (seconds)')
+ax[0].set_ylabel('Number of Puzzles')
+ax[1].yaxis.set_tick_params(which='both', labelleft=True)
+
 
 objects = ('Recursive Solve', 'Human Recursive\n Solve')
 y_pos = np.arange(len(objects))

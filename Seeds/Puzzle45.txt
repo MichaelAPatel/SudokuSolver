@@ -1,0 +1,9 @@
+- H - A B C - - -
+D E F - H - - - -
+- B - - - F I G H
+F - B I - - - E -
+- - - E - - B F D
+E - A - D B - I G
+- F E - - G D B A
+- - - C - - G - I
+H I G - A D - - F
